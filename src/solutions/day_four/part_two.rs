@@ -1,20 +1,63 @@
-use super::{MASX_MB, MASX_ML, MASX_MR, MASX_MT, XMASSES};
+use super::{MMASS, MSAMS, SMASM, SSAMM, XMASSES};
+use std::ops::{Index, IndexMut};
+
+#[derive(Debug)]
+struct U64 {
+  inner: [u8; 5],
+  _alignment: [u64; 0],
+}
+
+impl U64 {
+  #[inline(always)]
+  pub fn new() -> Self {
+    Self {
+      inner: [0; 5],
+      _alignment: [],
+    }
+  }
+}
+
+impl Index<usize> for U64 {
+  type Output = u8;
+  #[inline(always)]
+  fn index<'ref_life>(&'ref_life self, idx: usize) -> &'ref_life u8 {
+    &self.inner[idx]
+  }
+}
+
+impl IndexMut<usize> for U64 {
+  #[inline(always)]
+  fn index_mut<'ref_life>(&'ref_life mut self, idx: usize) -> &'ref_life mut u8 {
+    &mut self.inner[idx]
+  }
+}
 
 pub fn solution() -> u16 {
   let mut sum = 0;
+  let mut comp = U64::new();
+  let mut xr0 = &XMASSES[0];
+  let mut xr2 = &XMASSES[0];
 
   for row in 0..138 {
     for col in 0..138 {
-      let x = [
-        XMASSES[row][col],
-        XMASSES[row][col + 2],
-        XMASSES[row + 1][col + 1],
-        XMASSES[row + 2][col],
-        XMASSES[row + 2][col + 2],
-      ];
-      sum += (x == MASX_MT || x == MASX_MR || x == MASX_MB || x == MASX_ML) as u16;
+      xr0 = &XMASSES[row];
+      xr2 = &XMASSES[row + 2];
+      comp[0] = xr0[col];
+      comp[1] = xr0[col + 2];
+      comp[2] = (&(XMASSES[row + 1]))[col + 1];
+      comp[3] = xr2[col];
+      comp[4] = xr2[col + 2];
+
+      sum += unsafe { comp_tpun(&comp) }
     }
   }
 
   sum
+}
+
+#[inline(always)]
+unsafe fn comp_tpun(val: &U64) -> u16 {
+  let punned = *(val as *const _ as *const u64);
+
+  (punned == MMASS || punned == MSAMS || punned == SMASM || punned == SSAMM) as u16
 }

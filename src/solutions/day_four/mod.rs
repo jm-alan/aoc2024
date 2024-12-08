@@ -1,10 +1,10 @@
 pub mod part_one;
 pub mod part_two;
 
-const MASX_MT: [u8; 5] = [b'M', b'M', b'A', b'S', b'S'];
-const MASX_MR: [u8; 5] = [b'S', b'M', b'A', b'S', b'M'];
-const MASX_MB: [u8; 5] = [b'S', b'S', b'A', b'M', b'M'];
-const MASX_ML: [u8; 5] = [b'M', b'S', b'A', b'M', b'S'];
+const MMASS: u64 = 0x4D4D415353;
+const SMASM: u64 = 0x534D41534D;
+const SSAMM: u64 = 0x5353414D4D;
+const MSAMS: u64 = 0x4D53414D53;
 
 const XMAS_FOR: u32 = 0x584D4153; // XMAS
 const XMAS_REV: u32 = 0x53414D58; // SAMX

@@ -10,5 +10,5 @@ fn main() {
   println!("Day 3, part 1: {}", day_three::part_one::solution());
   println!("Day 3, part 2: {}", day_three::part_two::solution());
   println!("Day 4, part 1: {}", day_four::part_one::solution());
-  println!("Day 4, part 1: {}", day_four::part_two::solution());
+  println!("Day 4, part 2: {}", day_four::part_two::solution());
 }

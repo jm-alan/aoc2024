@@ -1,3 +1,6 @@
+use super::{XMASSES, XMAS_FOR, XMAS_REV};
+use std::ops::{Index, IndexMut};
+
 #[derive(Debug)]
 pub struct U32 {
   inner: [u8; 4],
@@ -28,9 +31,7 @@ impl IndexMut<usize> for U32 {
     &mut self.inner[idx]
   }
 }
-use std::ops::{Index, IndexMut};
 
-use super::{XMASSES, XMAS_FOR, XMAS_REV};
 // WAS 2378
 
 pub fn solution() -> u16 {
