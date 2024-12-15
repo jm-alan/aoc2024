@@ -5,7 +5,7 @@ use super::{PAGE_REQUIREMENTS, UPDATES};
 type SetMap<'ref_life> = HashMap<&'ref_life u8, HashSet<&'ref_life u8>>;
 type VecMap<'ref_life> = HashMap<&'ref_life u8, Vec<&'ref_life u8>>;
 
-pub fn solution() -> u16 {
+pub fn solution() -> i64 {
   let mut sum = 0;
   let mut requires_set_map: SetMap = HashMap::new();
   let mut requirements_map: VecMap = HashMap::new();
@@ -34,13 +34,13 @@ pub fn solution() -> u16 {
 
   for i in 0..196 {
     if update_valid(
-      &UPDATES[i],
+      UPDATES[i],
       &mut requires_set_map,
       &mut requirements_map,
       &mut requires_restore,
       &mut requirements_restore,
     ) {
-      sum += UPDATES[i][(&((&UPDATES)[i])).len() / 2] as u16;
+      sum += UPDATES[i][UPDATES[i].len() / 2] as i64;
     }
   }
 
@@ -49,11 +49,11 @@ pub fn solution() -> u16 {
 
 #[inline(always)]
 fn update_valid(
-  update: &[u8],
-  requires_set_map: &mut SetMap,
-  requirements_map: &mut VecMap,
-  requires_restore: &mut VecMap,
-  requirements_restore: &mut VecMap,
+  _update: &[u8],
+  _requires_set_map: &mut SetMap,
+  _requirements_map: &mut VecMap,
+  _requires_restore: &mut VecMap,
+  _requirements_restore: &mut VecMap,
 ) -> bool {
   false
 }

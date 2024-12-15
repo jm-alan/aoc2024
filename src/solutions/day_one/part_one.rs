@@ -1,14 +1,15 @@
-use super::{LEFT, RIGHT};
+use super::{LEFT_MUTREF, RIGHT_MUTREF};
 
-pub fn solution() -> i32 {
-  let mut left = LEFT.clone();
-  let mut right = RIGHT.clone();
+pub fn solution() -> i64 {
+  unsafe {
+    LEFT_MUTREF.sort_unstable();
+    RIGHT_MUTREF.sort_unstable();
+  }
 
-  left.sort_unstable();
-  right.sort_unstable();
-
-  left
-    .iter()
-    .zip(right.iter())
-    .fold(0, |sum, (l, r)| (*l - *r).abs() + sum)
+  unsafe {
+    LEFT_MUTREF
+      .iter()
+      .zip(RIGHT_MUTREF.iter())
+      .fold(0, |sum, (l, r)| (*l - *r).abs() + sum)
+  }
 }

@@ -1,10 +1,10 @@
-use super::CORRUPTED_MEMORY;
+use super::{digimul, CORRUPTED_MEMORY};
 
-pub fn solution() -> u32 {
+pub fn solution() -> i64 {
   let mut state: u8 = 0;
   let mut sum = 0;
-  let mut left: [u32; 3] = [0; 3];
-  let mut right: [u32; 3] = [0; 3];
+  let mut left: [i64; 3] = [0; 3];
+  let mut right: [i64; 3] = [0; 3];
   let mut lpos = 0;
   let mut rpos = 0;
 
@@ -16,21 +16,21 @@ pub fn solution() -> u32 {
       (b'(', 3) => state = 4,
       (b'0'..=b'9', 4) => {
         state = 5;
-        left[lpos] = (ch - 48) as u32;
+        left[lpos] = (ch - 48) as i64;
         lpos += 1;
       },
       (b'0'..=b'9', 5) => {
-        left[lpos] = (ch - 48) as u32;
+        left[lpos] = (ch - 48) as i64;
         lpos += 1;
       },
       (b',', 5) => state = 6,
       ((b'0'..=b'9'), 6) => {
         state = 7;
-        right[rpos] = (ch - 48) as u32;
+        right[rpos] = (ch - 48) as i64;
         rpos += 1;
       },
       (b'0'..=b'9', 7) => {
-        right[rpos] = (ch - 48) as u32;
+        right[rpos] = (ch - 48) as i64;
         rpos += 1;
       },
       (b')', 7) => {
@@ -48,22 +48,4 @@ pub fn solution() -> u32 {
   }
 
   sum
-}
-
-#[inline(always)]
-fn digimul(sum: &mut u32, left: &[u32], right: &[u32]) {
-  *sum += binconv(left) * binconv(right);
-}
-
-#[inline(always)]
-fn binconv(digital: &[u32]) -> u32 {
-  let mut val = 0u32;
-  *digital
-    .iter()
-    .rev()
-    .enumerate()
-    .fold(&mut val, |sum, (idx, val)| {
-      *sum += (*val) * 10u32.pow(idx as u32);
-      sum
-    })
 }
