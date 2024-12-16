@@ -1014,7 +1014,7 @@ pub fn is_safe(report: &[i8]) -> bool {
     let entry = report[idx];
     let diff = entry - report[idx - 1];
 
-    if diff == 0 || diff < -3 || diff > 3 {
+    if diff == 0 || !(-3..=3).contains(&diff) {
       return false;
     }
 
@@ -1024,7 +1024,7 @@ pub fn is_safe(report: &[i8]) -> bool {
         SET_ONCE = true;
         INCREASING = diff > 0;
       },
-      _ => {},
+      _ => {}
     }
   }
 
