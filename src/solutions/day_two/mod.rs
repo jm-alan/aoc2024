@@ -1024,7 +1024,7 @@ pub fn is_safe(report: &[i8]) -> bool {
         SET_ONCE = true;
         INCREASING = diff > 0;
       },
-      _ => {}
+      _ => {},
     }
   }
 
