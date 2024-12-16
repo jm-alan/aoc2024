@@ -4,7 +4,7 @@ mod timing;
 use solutions::{day_five, day_four, day_one, day_three, day_two};
 use timing::stopwatch;
 
-pub const ITERATIONS: usize = 50000;
+pub const ITERATIONS: usize = 100000;
 
 fn main() {
   unsafe {
